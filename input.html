@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DSS SMART - Input Penilaian</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="input-page">
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav>
+      <div class="logo">DSS SMART</div>
+
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+
+        <li>
+          <a href="input.html">Input Penilaian</a>
+        </li>
+
+        <li>
+          <a href="perhitungan.html">Hasil Perhitungan</a>
+        </li>
+
+        <li>
+          <a href="rekomendasi.html">Rekomendasi</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ========================= -->
+    <!-- FORM INPUT -->
+    <!-- ========================= -->
+
+    <section class="form-section">
+      <div class="form-container">
+        <h1>Input Penilaian Ekstrakurikuler</h1>
+
+        <p class="form-description">
+          Silakan masukkan nilai untuk setiap kegiatan ekstrakurikuler
+          berdasarkan kriteria yang telah ditentukan.
+        </p>
+
+        <!-- ========================= -->
+        <!-- TABLE INPUT -->
+        <!-- ========================= -->
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ekstrakurikuler</th>
+              <th>Minat</th>
+              <th>Bakat</th>
+              <th>Waktu</th>
+              <th>Prestasi</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- BASKET -->
+            <tr>
+              <td>Basket</td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+            </tr>
+
+            <!-- VOLLY -->
+            <tr>
+              <td>Volly</td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+            </tr>
+
+            <!-- AIKIDO -->
+            <tr>
+              <td>Aikido</td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+            </tr>
+
+            <!-- FUTSAL -->
+            <tr>
+              <td>Futsal</td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+
+              <td>
+                <input type="number" placeholder="0" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- ========================= -->
+        <!-- BUTTON -->
+        <!-- ========================= -->
+
+        <div class="button-area">
+          <button class="btn btn-primary" id="proses-btn">
+            Mulai Perhitungan
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script src="script.js"></script>
+  </body>
+</html>

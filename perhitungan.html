@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DSS SMART - Hasil Perhitungan</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body id="hasil-page">
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav>
+      <div class="logo">DSS SMART</div>
+
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+
+        <li>
+          <a href="input.html">Input Penilaian</a>
+        </li>
+
+        <li>
+          <a href="perhitungan.html">Hasil Perhitungan</a>
+        </li>
+
+        <li>
+          <a href="rekomendasi.html">Rekomendasi</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ========================= -->
+    <!-- SECTION -->
+    <!-- ========================= -->
+
+    <section class="calculation-section">
+      <div class="calculation-container">
+        <h1>Hasil Perhitungan SMART</h1>
+
+        <p class="calculation-description">
+          Berikut merupakan hasil normalisasi dan nilai utility berdasarkan
+          metode SMART.
+        </p>
+
+        <!-- ========================= -->
+        <!-- TABLE -->
+        <!-- ========================= -->
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ekstrakurikuler</th>
+              <th>Minat</th>
+              <th>Bakat</th>
+              <th>Waktu</th>
+              <th>Prestasi</th>
+              <th>Utility</th>
+            </tr>
+          </thead>
+
+          <!-- DATA DARI JAVASCRIPT -->
+          <tbody id="hasil-body">
+            <tr>
+              <td colspan="6">Belum ada data perhitungan</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- ========================= -->
+        <!-- BUTTON -->
+        <!-- ========================= -->
+
+        <div class="button-area">
+          <a href="rekomendasi.html" class="btn btn-primary">
+            Lihat Rekomendasi
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script src="script.js"></script>
+  </body>
+</html>

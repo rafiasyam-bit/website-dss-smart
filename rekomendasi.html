@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DSS SMART - Rekomendasi</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body id="rekomendasi-page">
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav>
+      <div class="logo">DSS SMART</div>
+
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+
+        <li>
+          <a href="input.html">Input Penilaian</a>
+        </li>
+
+        <li>
+          <a href="perhitungan.html">Hasil Perhitungan</a>
+        </li>
+
+        <li>
+          <a href="rekomendasi.html">Rekomendasi</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ========================= -->
+    <!-- REKOMENDASI SECTION -->
+    <!-- ========================= -->
+
+    <section class="recommendation-section">
+      <div class="recommendation-container">
+        <!-- BADGE -->
+        <div class="recommendation-badge">🏆 Rekomendasi Terbaik</div>
+
+        <!-- NAMA REKOMENDASI -->
+        <h1 id="nama-rekomendasi">Belum Ada Hasil</h1>
+
+        <!-- DESKRIPSI -->
+        <p id="deskripsi-rekomendasi">
+          Silakan lakukan proses perhitungan terlebih dahulu untuk mendapatkan
+          rekomendasi ekstrakurikuler terbaik.
+        </p>
+
+        <!-- CARD -->
+        <div class="result-card-group">
+          <!-- UTILITY -->
+          <div class="result-card">
+            <h2>Nilai Utility</h2>
+
+            <span id="nilai-utility"> 0.00 </span>
+          </div>
+
+          <!-- RANKING -->
+          <div class="result-card">
+            <h2>Ranking</h2>
+
+            <span> #1 </span>
+          </div>
+
+          <!-- STATUS -->
+          <div class="result-card">
+            <h2>Status</h2>
+
+            <span> Terbaik </span>
+          </div>
+        </div>
+
+        <!-- BUTTON -->
+        <div class="button-area center-button">
+          <a href="input.html" class="btn btn-primary">
+            Kembali ke Input Penilaian
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
