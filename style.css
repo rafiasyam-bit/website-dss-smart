@@ -500,3 +500,321 @@ input {
     width: 100%;
   }
 }
+
+/* =========================
+   CHART
+========================= */
+
+.chart-container {
+  margin-top: 40px;
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h2 {
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+
+#utilityChart {
+  max-height: 400px;
+}
+
+/* =========================
+   CHART
+========================= */
+
+.chart-container {
+  margin-top: 40px;
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h2 {
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+
+#utilityChart {
+  max-height: 400px;
+}
+
+/* =========================
+   CHART DSS
+========================= */
+
+.chart-container {
+  margin-top: 40px;
+
+  padding: 30px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.chart-container h2 {
+  text-align: center;
+
+  margin-bottom: 20px;
+
+  color: #1e293b;
+}
+
+#utilityChart {
+  height: 500px !important;
+}
+
+.chart-empty {
+  text-align: center;
+
+  padding: 30px;
+
+  color: #64748b;
+
+  font-size: 18px;
+}
+
+/* =========================
+   RANKING CARD
+========================= */
+
+#ranking-card {
+  margin-top: 30px;
+
+  display: grid;
+
+  gap: 15px;
+}
+
+.rank-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 18px;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s;
+}
+
+.rank-card:hover {
+  transform: translateY(-3px);
+}
+
+.rank-card h3 {
+  color: #0f172a;
+
+  margin: 0;
+
+  font-size: 18px;
+
+  font-weight: 600;
+}
+
+.rank-card p {
+  color: #64748b;
+
+  margin-top: 5px;
+}
+
+.rank-medal {
+  font-size: 32px;
+}
+
+/* =========================
+   PANDUAN PENILAIAN
+========================= */
+
+.panduan-card {
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  margin-bottom: 30px;
+}
+
+.panduan-header {
+  font-size: 24px;
+
+  font-weight: 600;
+
+  margin-bottom: 15px;
+
+  color: #38bdf8;
+}
+
+.panduan-text {
+  color: #cbd5e1;
+
+  margin-bottom: 25px;
+}
+
+.skala-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 10px;
+
+  margin-bottom: 25px;
+}
+
+.skala-item {
+  background: rgba(56, 189, 248, 0.15);
+
+  padding: 15px;
+
+  text-align: center;
+
+  border-radius: 12px;
+}
+
+.skala-item span {
+  display: block;
+
+  font-size: 24px;
+
+  font-weight: bold;
+
+  color: #38bdf8;
+}
+
+.kriteria-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.kriteria-card {
+  background: rgba(255, 255, 255, 0.05);
+
+  padding: 15px;
+
+  border-radius: 12px;
+}
+
+.kriteria-card h4 {
+  color: #38bdf8;
+
+  margin-bottom: 8px;
+}
+
+.kriteria-card p {
+  color: #cbd5e1;
+
+  font-size: 14px;
+}
+
+.bobot-info {
+  background: rgba(56, 189, 248, 0.12);
+
+  padding: 15px;
+
+  border-radius: 12px;
+}
+
+.bobot-info h4 {
+  color: #38bdf8;
+
+  margin-bottom: 10px;
+}
+
+.bobot-info ul {
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.bobot-info li {
+  margin-bottom: 5px;
+
+  color: #e2e8f0;
+}
+
+.bobot-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+
+  margin-top: 15px;
+}
+
+.bobot-card {
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  transition: 0.3s;
+}
+
+.bobot-card:hover {
+  transform: translateY(-3px);
+
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.bobot-card span {
+  font-size: 28px;
+
+  display: block;
+
+  margin-bottom: 10px;
+}
+
+.bobot-card h5 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 16px;
+}
+
+.bobot-card p {
+  margin-top: 10px;
+
+  color: #38bdf8;
+
+  font-size: 24px;
+
+  font-weight: bold;
+}

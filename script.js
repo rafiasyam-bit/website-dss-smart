@@ -1,328 +1,618 @@
-// =====================================================
-// RESET SAAT REFRESH
-// =====================================================
+// =========================
+// DATA DEFAULT EKSKUL
+// =========================
+// =========================
+// RESET DATA SAAT REFRESH
+// =========================
 
-if (performance.navigation.type === 1) {
-  sessionStorage.clear();
+const navEntries = performance.getEntriesByType("navigation");
+
+if (navEntries.length > 0 && navEntries[0].type === "reload") {
+  sessionStorage.removeItem("nilaiEkskul");
+
+  sessionStorage.removeItem("hasilSMART");
 }
-// =====================================================
-// FILE : script.js
-// DSS SMART SYSTEM
-// =====================================================
+const DEFAULT_EKSKUL = ["Basket", "Volly", "Aikido", "Futsal"];
 
-// =====================================================
-// INPUT PAGE
-// =====================================================
+// =========================
+// LOAD DATA EKSKUL
+// =========================
 
-const inputPage = document.getElementById("input-page");
+function getEkskulList() {
+  let ekskul = JSON.parse(localStorage.getItem("daftarEkskul"));
 
-if (inputPage) {
-  // =========================
-  // AMBIL SEMUA INPUT
-  // =========================
+  if (!ekskul) {
+    ekskul = DEFAULT_EKSKUL;
 
-  const inputs = document.querySelectorAll("input");
-
-  // =====================================================
-  // AMBIL DATA SESSION
-  // =====================================================
-
-  const savedData = JSON.parse(sessionStorage.getItem("nilaiEkskul"));
-
-  // =====================================================
-  // TAMPILKAN DATA JIKA ADA
-  // =====================================================
-
-  if (savedData) {
-    // BASKET
-    inputs[0].value = savedData.basket.minat;
-    inputs[1].value = savedData.basket.bakat;
-    inputs[2].value = savedData.basket.waktu;
-    inputs[3].value = savedData.basket.prestasi;
-
-    // VOLLY
-    inputs[4].value = savedData.volly.minat;
-    inputs[5].value = savedData.volly.bakat;
-    inputs[6].value = savedData.volly.waktu;
-    inputs[7].value = savedData.volly.prestasi;
-
-    // AIKIDO
-    inputs[8].value = savedData.aikido.minat;
-    inputs[9].value = savedData.aikido.bakat;
-    inputs[10].value = savedData.aikido.waktu;
-    inputs[11].value = savedData.aikido.prestasi;
-
-    // FUTSAL
-    inputs[12].value = savedData.futsal.minat;
-    inputs[13].value = savedData.futsal.bakat;
-    inputs[14].value = savedData.futsal.waktu;
-    inputs[15].value = savedData.futsal.prestasi;
+    localStorage.setItem("daftarEkskul", JSON.stringify(ekskul));
   }
 
-  // =====================================================
-  // AUTO SAVE INPUT
-  // =====================================================
+  return ekskul;
+}
 
-  document.addEventListener("input", function () {
-    const autoSaveData = {
-      basket: {
-        minat: parseFloat(inputs[0].value) || 0,
-        bakat: parseFloat(inputs[1].value) || 0,
-        waktu: parseFloat(inputs[2].value) || 0,
-        prestasi: parseFloat(inputs[3].value) || 0,
-      },
+// =========================
+// SIMPAN DATA EKSKUL
+// =========================
 
-      volly: {
-        minat: parseFloat(inputs[4].value) || 0,
-        bakat: parseFloat(inputs[5].value) || 0,
-        waktu: parseFloat(inputs[6].value) || 0,
-        prestasi: parseFloat(inputs[7].value) || 0,
-      },
+function saveEkskulList(data) {
+  localStorage.setItem("daftarEkskul", JSON.stringify(data));
+}
 
-      aikido: {
-        minat: parseFloat(inputs[8].value) || 0,
-        bakat: parseFloat(inputs[9].value) || 0,
-        waktu: parseFloat(inputs[10].value) || 0,
-        prestasi: parseFloat(inputs[11].value) || 0,
-      },
+// =========================
+// LOAD NILAI SEMENTARA
+// =========================
 
-      futsal: {
-        minat: parseFloat(inputs[12].value) || 0,
-        bakat: parseFloat(inputs[13].value) || 0,
-        waktu: parseFloat(inputs[14].value) || 0,
-        prestasi: parseFloat(inputs[15].value) || 0,
-      },
+function getNilaiData() {
+  return JSON.parse(sessionStorage.getItem("nilaiEkskul")) || {};
+}
+
+// =========================
+// SIMPAN NILAI SEMENTARA
+// =========================
+
+function saveNilaiData(data) {
+  sessionStorage.setItem("nilaiEkskul", JSON.stringify(data));
+}
+
+// =========================
+// RENDER TABEL INPUT
+// =========================
+
+function renderInputTable() {
+  const tbody = document.getElementById("ekskul-body");
+
+  if (!tbody) return;
+
+  const ekskulList = getEkskulList();
+  const nilaiData = getNilaiData();
+
+  tbody.innerHTML = "";
+
+  ekskulList.forEach((nama) => {
+    const data = nilaiData[nama] || {
+      minat: "",
+      bakat: "",
+      waktu: "",
+      prestasi: "",
     };
 
-    // SIMPAN INPUT SEMENTARA
-    sessionStorage.setItem("nilaiEkskul", JSON.stringify(autoSaveData));
+    tbody.innerHTML += `
+      <tr>
+
+        <td>
+          ${nama}
+        </td>
+
+        <td>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value="${data.minat}"
+            onchange="updateNilai('${nama}','minat',this.value)"
+          >
+        </td>
+
+        <td>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value="${data.bakat}"
+            onchange="updateNilai('${nama}','bakat',this.value)"
+          >
+        </td>
+
+        <td>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value="${data.waktu}"
+            onchange="updateNilai('${nama}','waktu',this.value)"
+          >
+        </td>
+
+        <td>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value="${data.prestasi}"
+            onchange="updateNilai('${nama}','prestasi',this.value)"
+          >
+        </td>
+
+        <td>
+          <button
+            type="button"
+            onclick="hapusEkskul('${nama}')"
+          >
+            Hapus
+          </button>
+        </td>
+
+      </tr>
+    `;
   });
+}
 
-  // =====================================================
-  // BUTTON PROSES
-  // =====================================================
+// =========================
+// UPDATE NILAI
+// =========================
 
-  const prosesButton = document.getElementById("proses-btn");
+function updateNilai(nama, field, value) {
+  let nilai = Number(value);
 
-  prosesButton.addEventListener("click", function () {
-    // =========================
-    // AMBIL DATA INPUT
-    // =========================
+  if (value === "") {
+    nilai = "";
+  } else {
+    if (nilai < 1) {
+      nilai = 1;
+    }
 
-    const data = {
-      basket: {
-        minat: parseFloat(inputs[0].value) || 0,
-        bakat: parseFloat(inputs[1].value) || 0,
-        waktu: parseFloat(inputs[2].value) || 0,
-        prestasi: parseFloat(inputs[3].value) || 0,
-      },
+    if (nilai > 5) {
+      nilai = 5;
+    }
+  }
 
-      volly: {
-        minat: parseFloat(inputs[4].value) || 0,
-        bakat: parseFloat(inputs[5].value) || 0,
-        waktu: parseFloat(inputs[6].value) || 0,
-        prestasi: parseFloat(inputs[7].value) || 0,
-      },
+  const data = getNilaiData();
 
-      aikido: {
-        minat: parseFloat(inputs[8].value) || 0,
-        bakat: parseFloat(inputs[9].value) || 0,
-        waktu: parseFloat(inputs[10].value) || 0,
-        prestasi: parseFloat(inputs[11].value) || 0,
-      },
-
-      futsal: {
-        minat: parseFloat(inputs[12].value) || 0,
-        bakat: parseFloat(inputs[13].value) || 0,
-        waktu: parseFloat(inputs[14].value) || 0,
-        prestasi: parseFloat(inputs[15].value) || 0,
-      },
+  if (!data[nama]) {
+    data[nama] = {
+      minat: "",
+      bakat: "",
+      waktu: "",
+      prestasi: "",
     };
+  }
 
-    // =====================================================
-    // PROSES SMART
-    // =====================================================
+  data[nama][field] = nilai;
 
-    const alternatif = [
-      {
-        nama: "Basket",
-        ...data.basket,
-      },
+  saveNilaiData(data);
 
-      {
-        nama: "Volly",
-        ...data.volly,
-      },
+  renderInputTable();
+}
 
-      {
-        nama: "Aikido",
-        ...data.aikido,
-      },
+// =========================
+// TAMBAH EKSKUL
+// =========================
 
-      {
-        nama: "Futsal",
-        ...data.futsal,
-      },
+function tambahEkskul() {
+  const nama = prompt("Masukkan nama ekstrakurikuler:");
+
+  if (!nama) return;
+
+  const ekskulList = getEkskulList();
+
+  if (ekskulList.includes(nama)) {
+    alert("Ekskul sudah ada!");
+
+    return;
+  }
+
+  ekskulList.push(nama);
+
+  saveEkskulList(ekskulList);
+
+  renderInputTable();
+}
+
+// =========================
+// HAPUS EKSKUL
+// =========================
+
+function hapusEkskul(nama) {
+  if (!confirm(`Hapus ${nama}?`)) return;
+
+  let ekskulList = getEkskulList();
+
+  ekskulList = ekskulList.filter((item) => item !== nama);
+
+  saveEkskulList(ekskulList);
+
+  const nilaiData = getNilaiData();
+
+  delete nilaiData[nama];
+
+  saveNilaiData(nilaiData);
+
+  renderInputTable();
+}
+
+// =========================
+// INIT INPUT PAGE
+// =========================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tambahBtn = document.getElementById("tambah-ekskul");
+
+  if (tambahBtn) {
+    renderInputTable();
+
+    tambahBtn.addEventListener("click", tambahEkskul);
+
+    const prosesBtn = document.getElementById("proses-btn");
+
+    if (prosesBtn) {
+      prosesBtn.addEventListener("click", prosesSMART);
+    }
+  }
+  tampilkanHasilSMART();
+  tampilkanRekomendasi();
+  tampilkanGrafik();
+  tampilkanRankingCard();
+});
+
+// =========================
+// BOBOT SMART
+// =========================
+
+const BOBOT = {
+  minat: 0.3,
+  bakat: 0.3,
+  waktu: 0.2,
+  prestasi: 0.2,
+};
+
+// =========================
+// PROSES SMART
+// =========================
+
+function prosesSMART() {
+  const nilaiData = getNilaiData();
+
+  const ekskulList = getEkskulList();
+
+  if (ekskulList.length === 0) {
+    alert("Belum ada ekstrakurikuler!");
+
+    return;
+  }
+
+  // =========================
+  // VALIDASI INPUT
+  // =========================
+
+  const dataBelumLengkap = [];
+
+  for (const nama of ekskulList) {
+    if (
+      !nilaiData[nama] ||
+      nilaiData[nama].minat === "" ||
+      nilaiData[nama].bakat === "" ||
+      nilaiData[nama].waktu === "" ||
+      nilaiData[nama].prestasi === ""
+    ) {
+      dataBelumLengkap.push(nama);
+    }
+  }
+  if (dataBelumLengkap.length > 0) {
+    alert(
+      "Data berikut belum lengkap:\n\n" +
+        dataBelumLengkap.join("\n") +
+        "\n\nSilakan lengkapi terlebih dahulu.",
+    );
+
+    return;
+
+    const d = nilaiData[nama];
+
+    const daftarNilai = [
+      Number(d.minat),
+      Number(d.bakat),
+      Number(d.waktu),
+      Number(d.prestasi),
     ];
 
-    // =====================================================
-    // TOTAL KRITERIA
-    // =====================================================
+    for (const nilai of daftarNilai) {
+      if (nilai < 1 || nilai > 5) {
+        alert(`Semua nilai harus berada pada rentang 1 sampai 5.`);
 
-    let totalMinat = 0;
-    let totalBakat = 0;
-    let totalWaktu = 0;
-    let totalPrestasi = 0;
+        return;
+      }
+    }
+  }
 
-    alternatif.forEach((item) => {
-      totalMinat += item.minat;
-      totalBakat += item.bakat;
-      totalWaktu += item.waktu;
-      totalPrestasi += item.prestasi;
+  // Cari nilai maksimum
+
+  let maxMinat = 0;
+  let maxBakat = 0;
+  let maxWaktu = 0;
+  let maxPrestasi = 0;
+
+  ekskulList.forEach((nama) => {
+    const d = nilaiData[nama];
+
+    maxMinat = Math.max(maxMinat, Number(d.minat));
+
+    maxBakat = Math.max(maxBakat, Number(d.bakat));
+
+    maxWaktu = Math.max(maxWaktu, Number(d.waktu));
+
+    maxPrestasi = Math.max(maxPrestasi, Number(d.prestasi));
+  });
+
+  const hasil = [];
+
+  ekskulList.forEach((nama) => {
+    const d = nilaiData[nama];
+
+    const minat = Number(d.minat) / maxMinat;
+
+    const bakat = Number(d.bakat) / maxBakat;
+
+    const waktu = Number(d.waktu) / maxWaktu;
+
+    const prestasi = Number(d.prestasi) / maxPrestasi;
+
+    const utility =
+      minat * BOBOT.minat +
+      bakat * BOBOT.bakat +
+      waktu * BOBOT.waktu +
+      prestasi * BOBOT.prestasi;
+
+    hasil.push({
+      nama,
+
+      minat: minat.toFixed(2),
+
+      bakat: bakat.toFixed(2),
+
+      waktu: waktu.toFixed(2),
+
+      prestasi: prestasi.toFixed(2),
+
+      utility: utility.toFixed(2),
     });
+  });
 
-    // =====================================================
-    // NORMALISASI + UTILITY
-    // =====================================================
+  hasil.sort((a, b) => b.utility - a.utility);
 
-    const hasilSMART = alternatif.map((item) => {
-      const nMinat = totalMinat === 0 ? 0 : item.minat / totalMinat;
+  sessionStorage.setItem("hasilSMART", JSON.stringify(hasil));
 
-      const nBakat = totalBakat === 0 ? 0 : item.bakat / totalBakat;
+  window.location.href = "perhitungan.html";
+}
 
-      const nWaktu = totalWaktu === 0 ? 0 : item.waktu / totalWaktu;
+// =========================
+// TAMPILKAN HASIL SMART
+// =========================
 
-      const nPrestasi = totalPrestasi === 0 ? 0 : item.prestasi / totalPrestasi;
+function tampilkanHasilSMART() {
+  const tbody = document.getElementById("hasil-body");
 
-      // =========================
-      // UTILITY
-      // =========================
+  if (!tbody) return;
 
-      const utility = nMinat + nBakat + nWaktu + nPrestasi;
+  const hasil = JSON.parse(sessionStorage.getItem("hasilSMART"));
 
-      return {
-        nama: item.nama,
+  if (!hasil || hasil.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6">
+          Belum ada data perhitungan
+        </td>
+      </tr>
+    `;
 
-        minat: nMinat.toFixed(2),
+    return;
+  }
 
-        bakat: nBakat.toFixed(2),
+  tbody.innerHTML = "";
 
-        waktu: nWaktu.toFixed(2),
+  hasil.forEach((item) => {
+    tbody.innerHTML += `
+      <tr>
 
-        prestasi: nPrestasi.toFixed(2),
+        <td>${item.nama}</td>
 
-        utility: utility.toFixed(2),
-      };
-    });
+        <td>${item.minat}</td>
 
-    // =====================================================
-    // SORTING RANKING
-    // =====================================================
+        <td>${item.bakat}</td>
 
-    hasilSMART.sort((a, b) => {
-      return b.utility - a.utility;
-    });
+        <td>${item.waktu}</td>
 
-    // =====================================================
-    // SIMPAN HASIL
-    // =====================================================
+        <td>${item.prestasi}</td>
 
-    sessionStorage.setItem("hasilSMART", JSON.stringify(hasilSMART));
+        <td>${item.utility}</td>
 
-    // =====================================================
-    // PINDAH HALAMAN
-    // =====================================================
-
-    window.location.href = "perhitungan.html";
+      </tr>
+    `;
   });
 }
 
-// =====================================================
-// PAGE HASIL PERHITUNGAN
-// =====================================================
+// =========================
+// HALAMAN REKOMENDASI
+// =========================
 
-const hasilPage = document.getElementById("hasil-page");
+function tampilkanRekomendasi() {
+  const namaEl = document.getElementById("nama-rekomendasi");
 
-if (hasilPage) {
-  // =========================
-  // AMBIL HASIL
-  // =========================
+  const utilityEl = document.getElementById("nilai-utility");
+
+  const deskripsiEl = document.getElementById("deskripsi-rekomendasi");
+
+  if (!namaEl || !utilityEl || !deskripsiEl) {
+    return;
+  }
 
   const hasil = JSON.parse(sessionStorage.getItem("hasilSMART"));
 
-  const tbody = document.getElementById("hasil-body");
+  if (!hasil || hasil.length === 0) {
+    namaEl.textContent = "Belum Ada Hasil";
 
-  // =====================================================
-  // JIKA ADA HASIL
-  // =====================================================
+    utilityEl.textContent = "0.00";
 
-  if (hasil && hasil.length > 0) {
-    tbody.innerHTML = "";
+    deskripsiEl.textContent =
+      "Silakan lakukan proses perhitungan terlebih dahulu untuk mendapatkan rekomendasi ekstrakurikuler terbaik.";
 
-    hasil.forEach((item) => {
-      tbody.innerHTML += `
-
-        <tr>
-
-          <td>${item.nama}</td>
-
-          <td>${item.minat}</td>
-
-          <td>${item.bakat}</td>
-
-          <td>${item.waktu}</td>
-
-          <td>${item.prestasi}</td>
-
-          <td class="utility-value">
-            ${item.utility}
-          </td>
-
-        </tr>
-
-      `;
-    });
+    return;
   }
+
+  const terbaik = hasil[0];
+
+  namaEl.textContent = terbaik.nama;
+
+  utilityEl.textContent = terbaik.utility;
+
+  deskripsiEl.textContent = `${terbaik.nama} memiliki nilai utility tertinggi sehingga direkomendasikan sebagai pilihan terbaik berdasarkan metode SMART.`;
 }
 
-// =====================================================
-// PAGE REKOMENDASI
-// =====================================================
+// =========================
+// GRAFIK UTILITY
+// =========================
 
-const rekomendasiPage = document.getElementById("rekomendasi-page");
+// =========================
+// GRAFIK RANKING UTILITY
+// =========================
 
-if (rekomendasiPage) {
-  // =========================
-  // AMBIL HASIL
-  // =========================
+let utilityChart = null;
+
+function tampilkanGrafik() {
+  const canvas = document.getElementById("utilityChart");
+
+  if (!canvas) return;
 
   const hasil = JSON.parse(sessionStorage.getItem("hasilSMART"));
 
-  // =====================================================
-  // JIKA ADA HASIL
-  // =====================================================
+  if (!hasil || hasil.length === 0) {
+    canvas.parentElement.innerHTML = `
+      <h2>Grafik Ranking Utility</h2>
 
-  if (hasil && hasil.length > 0) {
-    // =========================
-    // NAMA REKOMENDASI
-    // =========================
+      <p class="chart-empty">
+        Belum ada data grafik
+      </p>
+    `;
 
-    document.getElementById("nama-rekomendasi").innerText = hasil[0].nama;
-
-    // =========================
-    // NILAI UTILITY
-    // =========================
-
-    document.getElementById("nilai-utility").innerText = hasil[0].utility;
-
-    // =========================
-    // DESKRIPSI
-    // =========================
-
-    document.getElementById("deskripsi-rekomendasi").innerText =
-      `Berdasarkan hasil perhitungan metode SMART, 
-      ${hasil[0].nama} menjadi rekomendasi terbaik 
-      karena memiliki nilai utility tertinggi 
-      dibandingkan alternatif lainnya.`;
+    return;
   }
+
+  const labels = hasil.map((item, index) => {
+    let rank = `${index + 1}`;
+
+    if (index === 0) rank = "🥇";
+    if (index === 1) rank = "🥈";
+    if (index === 2) rank = "🥉";
+
+    return `${rank} ${item.nama}`;
+  });
+
+  const utilities = hasil.map((item) => parseFloat(item.utility));
+
+  const warna = [
+    "#3b82f6",
+    "#22c55e",
+    "#f59e0b",
+    "#ef4444",
+    "#8b5cf6",
+    "#06b6d4",
+    "#ec4899",
+    "#84cc16",
+    "#f97316",
+    "#14b8a6",
+  ];
+
+  if (utilityChart) {
+    utilityChart.destroy();
+  }
+
+  utilityChart = new Chart(canvas, {
+    type: "bar",
+
+    data: {
+      labels: labels,
+
+      datasets: [
+        {
+          label: "Nilai Utility",
+
+          data: utilities,
+
+          backgroundColor: utilities.map(
+            (_, index) => warna[index % warna.length],
+          ),
+
+          borderRadius: 12,
+
+          borderSkipped: false,
+        },
+      ],
+    },
+
+    options: {
+      indexAxis: "y",
+
+      responsive: true,
+
+      maintainAspectRatio: false,
+
+      animation: {
+        duration: 1500,
+      },
+
+      plugins: {
+        legend: {
+          display: false,
+        },
+
+        title: {
+          display: true,
+
+          text: "Ranking Utility Ekstrakurikuler",
+
+          font: {
+            size: 18,
+          },
+        },
+      },
+
+      scales: {
+        x: {
+          beginAtZero: true,
+
+          max: 1,
+        },
+      },
+    },
+  });
+}
+
+// =========================
+// CARD RANKING
+// =========================
+
+function tampilkanRankingCard() {
+  const container = document.getElementById("ranking-card");
+
+  if (!container) return;
+
+  const hasil = JSON.parse(sessionStorage.getItem("hasilSMART"));
+
+  if (!hasil) return;
+
+  container.innerHTML = "";
+
+  hasil.slice(0, 3).forEach((item, index) => {
+    const medal = ["🥇", "🥈", "🥉"];
+
+    container.innerHTML += `
+        <div class="rank-card">
+
+          <div class="rank-medal">
+            ${medal[index]}
+          </div>
+
+          <div>
+
+            <h3>${item.nama}</h3>
+
+            <p>
+              Utility :
+              ${item.utility}
+            </p>
+
+          </div>
+
+        </div>
+      `;
+  });
 }

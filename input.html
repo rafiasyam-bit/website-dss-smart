@@ -3,21 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>DSS SMART - Input Penilaian</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body id="input-page">
     <!-- ========================= -->
     <!-- NAVBAR -->
@@ -27,26 +22,15 @@
       <div class="logo">DSS SMART</div>
 
       <ul>
-        <li>
-          <a href="index.html">Home</a>
-        </li>
-
-        <li>
-          <a href="input.html">Input Penilaian</a>
-        </li>
-
-        <li>
-          <a href="perhitungan.html">Hasil Perhitungan</a>
-        </li>
-
-        <li>
-          <a href="rekomendasi.html">Rekomendasi</a>
-        </li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="input.html">Input Penilaian</a></li>
+        <li><a href="perhitungan.html">Hasil Perhitungan</a></li>
+        <li><a href="rekomendasi.html">Rekomendasi</a></li>
       </ul>
     </nav>
 
     <!-- ========================= -->
-    <!-- FORM INPUT -->
+    <!-- FORM SECTION -->
     <!-- ========================= -->
 
     <section class="form-section">
@@ -54,114 +38,143 @@
         <h1>Input Penilaian Ekstrakurikuler</h1>
 
         <p class="form-description">
-          Silakan masukkan nilai untuk setiap kegiatan ekstrakurikuler
-          berdasarkan kriteria yang telah ditentukan.
+          Masukkan nilai setiap ekstrakurikuler berdasarkan kriteria Minat,
+          Bakat, Waktu, dan Prestasi.
         </p>
 
         <!-- ========================= -->
-        <!-- TABLE INPUT -->
+        <!-- PANDUAN PENILAIAN -->
+        <!-- ========================= -->
+
+        <div class="panduan-card">
+          <div class="panduan-header">📋 Panduan Penilaian SMART</div>
+
+          <p class="panduan-text">
+            Berikan nilai pada setiap ekstrakurikuler menggunakan skala
+            <strong>1 sampai 5</strong> sesuai kondisi dan preferensi Anda.
+          </p>
+
+          <div class="skala-grid">
+            <div class="skala-item">
+              <span>1</span>
+              Sangat Rendah
+            </div>
+
+            <div class="skala-item">
+              <span>2</span>
+              Rendah
+            </div>
+
+            <div class="skala-item">
+              <span>3</span>
+              Sedang
+            </div>
+
+            <div class="skala-item">
+              <span>4</span>
+              Tinggi
+            </div>
+
+            <div class="skala-item">
+              <span>5</span>
+              Sangat Tinggi
+            </div>
+          </div>
+
+          <div class="kriteria-grid">
+            <div class="kriteria-card">
+              <h4>🎯 Minat</h4>
+              <p>
+                Seberapa besar ketertarikan Anda terhadap ekstrakurikuler
+                tersebut.
+              </p>
+            </div>
+
+            <div class="kriteria-card">
+              <h4>⭐ Bakat</h4>
+              <p>Seberapa besar kemampuan atau potensi yang Anda miliki.</p>
+            </div>
+
+            <div class="kriteria-card">
+              <h4>⏰ Waktu</h4>
+              <p>
+                Seberapa tersedia waktu yang Anda miliki untuk mengikuti
+                kegiatan.
+              </p>
+            </div>
+
+            <div class="kriteria-card">
+              <h4>🏆 Prestasi</h4>
+              <p>
+                Seberapa baik pengalaman atau pencapaian yang pernah diraih.
+              </p>
+            </div>
+          </div>
+
+          <div class="bobot-info">
+            <h4>⚖️ Bobot Kriteria</h4>
+
+            <div class="bobot-grid">
+              <div class="bobot-card">
+                <span>🎯</span>
+                <h5>Minat</h5>
+                <p>30%</p>
+              </div>
+
+              <div class="bobot-card">
+                <span>⭐</span>
+                <h5>Bakat</h5>
+                <p>30%</p>
+              </div>
+
+              <div class="bobot-card">
+                <span>⏰</span>
+                <h5>Waktu</h5>
+                <p>20%</p>
+              </div>
+
+              <div class="bobot-card">
+                <span>🏆</span>
+                <h5>Prestasi</h5>
+                <p>20%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================= -->
+        <!-- BUTTON TAMBAH -->
+        <!-- ========================= -->
+
+        <div style="margin-bottom: 20px">
+          <button type="button" class="btn btn-secondary" id="tambah-ekskul">
+            + Tambah Ekstrakurikuler
+          </button>
+        </div>
+
+        <!-- ========================= -->
+        <!-- TABLE -->
         <!-- ========================= -->
 
         <table>
           <thead>
             <tr>
-              <th>Ekstrakurikuler</th>
+              <th>Nama Ekskul</th>
               <th>Minat</th>
               <th>Bakat</th>
               <th>Waktu</th>
               <th>Prestasi</th>
+              <th>Aksi</th>
             </tr>
           </thead>
 
-          <tbody>
-            <!-- BASKET -->
-            <tr>
-              <td>Basket</td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-            </tr>
-
-            <!-- VOLLY -->
-            <tr>
-              <td>Volly</td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-            </tr>
-
-            <!-- AIKIDO -->
-            <tr>
-              <td>Aikido</td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-            </tr>
-
-            <!-- FUTSAL -->
-            <tr>
-              <td>Futsal</td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-
-              <td>
-                <input type="number" placeholder="0" />
-              </td>
-            </tr>
+          <tbody id="ekskul-body">
+            <!-- Diisi otomatis oleh JavaScript -->
           </tbody>
         </table>
 
         <!-- ========================= -->
-        <!-- BUTTON -->
+        <!-- BUTTON PROSES -->
         <!-- ========================= -->
 
         <div class="button-area">
@@ -173,7 +186,7 @@
     </section>
 
     <!-- ========================= -->
-    <!-- JAVASCRIPT -->
+    <!-- SCRIPT -->
     <!-- ========================= -->
 
     <script src="script.js"></script>
