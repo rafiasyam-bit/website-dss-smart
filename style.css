@@ -28,7 +28,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -817,4 +817,134 @@ input {
   font-size: 24px;
 
   font-weight: bold;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  /* NAVBAR */
+
+  nav {
+    padding: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  nav ul {
+    gap: 12px;
+  }
+
+  nav ul li a {
+    font-size: 14px;
+  }
+
+  /* CONTAINER */
+
+  .form-container,
+  .calculation-container,
+  .recommendation-container {
+    padding: 20px;
+  }
+
+  /* JUDUL */
+
+  .form-container h1,
+  .calculation-container h1 {
+    font-size: 26px;
+  }
+
+  .recommendation-container h1 {
+    font-size: 40px;
+  }
+
+  /* TABEL */
+
+  table {
+    display: block;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+  }
+
+  th,
+  td {
+    padding: 12px;
+
+    font-size: 13px;
+  }
+
+  input {
+    width: 60px;
+  }
+
+  /* PANDUAN */
+
+  .skala-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kriteria-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bobot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* CARD REKOMENDASI */
+
+  .result-card {
+    width: 100%;
+  }
+
+  /* GRAFIK */
+
+  #utilityChart {
+    height: 300px !important;
+  }
+
+  .chart-container {
+    padding: 15px;
+  }
+
+  /* RANKING */
+
+  .rank-card {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .rank-medal {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 32px;
+  }
+
+  .recommendation-container h1 {
+    font-size: 32px;
+  }
+
+  .skala-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bobot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav ul {
+    flex-direction: column;
+
+    align-items: center;
+  }
 }
