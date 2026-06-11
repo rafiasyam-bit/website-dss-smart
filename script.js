@@ -616,3 +616,22 @@ function tampilkanRankingCard() {
       `;
   });
 }
+
+// =========================
+// HAMBURGER MENU
+// =========================
+
+const menuToggle = document.getElementById("menu-toggle");
+const navbarMenu = document.getElementById("navbar-menu");
+
+if (menuToggle && navbarMenu) {
+  menuToggle.addEventListener("click", () => {
+    navbarMenu.classList.toggle("active");
+
+    if (navbarMenu.classList.contains("active")) {
+      menuToggle.innerHTML = "✕";
+    } else {
+      menuToggle.innerHTML = "☰";
+    }
+  });
+}
